@@ -13,26 +13,33 @@ bool byStrLength(string a, string b) { return a.size() > b.size(); }
 
 vector<string> MergeLists(vector<string> Original, vector<string> toAdd, vector<string> toDel){
     
-    //make a copy of original list
-    vector<string> Result(Original);
-    
+    vector<string> Result;
 
-    // add to Result strings from Add List 
-    // that don't already exist in Original
-    for (string word : toAdd) {
-        if (find(Result.begin(), Result.end(), word) == Result.end())
-            Result.push_back(word);
+    // add to Result only strings that aren't already in it
+    // AND that are not in Delete list
+    for (string word : Original) {
+
+        // check in Result
+        if (find(Result.begin(), Result.end(), word) == Result.end()) {
+
+            //check in Delete
+            if (find(toDel.begin(), toDel.end(), word) == toDel.end())
+                Result.push_back(word);
+        }
     }
 
+    // add to Result only strings that it doesn't already have
+    // AND that don't appear in Delete List
+    for (string word : toAdd) {
 
-    // remove from Result strings in Delete List
-    for (string word : toDel) {
-        auto i_toDel = find(Result.begin(), Result.end(), word);
+        //check in Result
+        if (find(Result.begin(), Result.end(), word) == Result.end()) {
 
-        if (i_toDel != Result.end())
-            Result.erase(i_toDel);   
-     }
-
+            //check in Delete
+            if (find(toDel.begin(), toDel.end(), word) == toDel.end())
+                Result.push_back(word);
+        }
+    }
 
     //arrange in reverse alphabetical order for tie cases
     sort(Result.begin(), Result.end(), byRevAlphabet);
