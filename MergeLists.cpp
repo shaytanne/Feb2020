@@ -19,11 +19,8 @@ vector<string> MergeLists(vector<string> Original, vector<string> toAdd, vector<
     // AND that are not in Delete list
     for (string word : Original) {
 
-        // check in Result
-        if (find(Result.begin(), Result.end(), word) == Result.end()) {
-
-            //check in Delete
-            if (find(toDel.begin(), toDel.end(), word) == toDel.end())
+        if (find(Result.begin(), Result.end(), word) == Result.end()) {  // check in Result
+            if (find(toDel.begin(), toDel.end(), word) == toDel.end())   //check in Delete
                 Result.push_back(word);
         }
     }
@@ -32,11 +29,8 @@ vector<string> MergeLists(vector<string> Original, vector<string> toAdd, vector<
     // AND that don't appear in Delete List
     for (string word : toAdd) {
 
-        //check in Result
-        if (find(Result.begin(), Result.end(), word) == Result.end()) {
-
-            //check in Delete
-            if (find(toDel.begin(), toDel.end(), word) == toDel.end())
+        if (find(Result.begin(), Result.end(), word) == Result.end()) {//check in Result
+            if (find(toDel.begin(), toDel.end(), word) == toDel.end())//check in Delete
                 Result.push_back(word);
         }
     }
